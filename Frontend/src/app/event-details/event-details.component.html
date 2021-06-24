@@ -1,0 +1,62 @@
+<div class="ui grid" *ngIf="event">
+
+  <div class="twelve wide column">
+
+    <h1 class="ui header">Impftermin</h1>
+
+
+    <div class="ui divider"></div>
+    <div class="ui grid">
+
+      <div class="one wide column"></div>
+
+      <div class="six wide column">
+        <h4 class="ui header">Datum:</h4>
+        {{this.datepipe.transform(event.appointment,'dd.MM.yyyy') }}
+        <h4 class="ui header">Uhrzeit:</h4>
+        {{this.datepipe.transform(event.appointment,'HH:mm')}}
+      </div>
+
+      <div class="six wide column">
+        <h4 class="ui header">Ort: </h4>
+        {{ event.location.street}} {{ event.location.houseNumber}}, {{event.location.postCode}} {{event.location.town}}
+      </div>
+
+    </div>
+  </div>
+
+  <ng-container *ngIf="isLoggedIn() && isAdmin()">
+  <div class="twelve wide column">
+    <ul>
+      <li *ngFor="let user of event.user">
+        {{user.name}}
+
+        <span *ngIf="user.isVaccinated">
+               | Aktueller Status: Geimpft
+            </span>
+        <span *ngIf="!user.isVaccinated">
+               | Impfstatus ändern:
+              <button class="ui green button tiny" (click)="userVacinateSet($event,user.id)">
+                Wurde geimpft
+                </button>
+            </span>
+      </li>
+    </ul>
+  </div>
+  </ng-container>
+</div>
+
+<button routerLink=".." class="ui red button tiny">Zurück zur Impftermin-Liste</button>
+<ng-container *ngIf="isLoggedIn() && !isAdmin() && userInfo && !userInfo.event">
+  <button class="ui tiny yellow labeld icon button" (click)="bookEvent()">Termin buchen</button>
+</ng-container>
+<ng-container *ngIf="isLoggedIn() && isAdmin()">
+  <button  class="ui tiny red labeld icon button" (click)="deleteEvent()">
+    <i class="remove icon"></i>
+    Impftermin löschen
+  </button>
+
+  <a class="ui tiny yellow labeld icon button" [routerLink]="['../../admin', event?.id]">
+    <i class="write icon"></i>Impftermin bearbeiten
+  </a>
+</ng-container>

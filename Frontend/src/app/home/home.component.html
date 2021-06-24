@@ -1,0 +1,18 @@
+<div class="ui-container">
+<h1>Home</h1>
+
+<ng-container *ngIf="this.userInfo && this.userInfo.isVaccinated">
+  Sie wurden schon geimpft.
+</ng-container>
+<ng-container *ngIf="this.userInfo && !this.userInfo.isVaccinated &&this.userInfo.event">
+  <h1>Ihr gebuchter Termin</h1>
+  <p>Datum: {{this.userInfo.event.appointment}}</p>
+  <p>Ort: {{this.userInfo.event.location.street}} 
+    {{this.userInfo.event.location.houseNumber}},
+    {{this.userInfo.event.location.postCode}}
+    {{this.userInfo.event.location.town}}</p>
+</ng-container>
+
+<p>Das ist Julias' Impfservice</p>
+<a routerLink="../events" class="ui red button">Impftermine anzeigen</a>
+</div>

@@ -1,0 +1,31 @@
+<h1>Impftermin-Formular</h1>
+<form class="ui large form" [formGroup]="eventForm" (ngSubmit)="submitForm()">
+  <input type="hidden" name="id">
+
+  <div class="field">
+    <label>Datum</label>
+    <input type="datetime-local" formControlName="dateTime">
+    <div *ngIf="errors.datetime" class="ui negative message">{{errors.datetime}}</div>
+  </div>
+
+  <div class="field">
+    <label>Maximal mögliche Anzahl an Personen</label>
+    <input type="text" formControlName="people">
+  </div>
+
+  <div class="field">
+    <label>Aktuelle Anzahl der Personen</label>
+    <span>{{event.current_amount}}</span>
+  </div>
+
+  <div class="field">
+    <label>Impfort</label>
+    <select (change)="impfLocationChanged($event)" formControlName="locationId">
+            <option *ngFor="let loc of locations" [value]="loc.id">{{loc.town}}</option>
+        </select>
+  </div>
+
+
+  <button type="submit" class="ui button" [disabled]="eventForm.invalid">Speichern</button>
+
+</form>

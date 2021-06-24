@@ -1,0 +1,9 @@
+<div class="ui  four item tabs menu">
+  <a routerLink="home" routerLinkActive="active" class="item">Startseite</a>
+  <a routerLink="events" routerLinkActive="active" class="item">Impftermine</a>
+  <a *ngIf="isLoggedIn() && isAdmin()" routerLink="admin" routerLinkActive="active" class="item">Neuen Impftermin
+    anlegen</a>
+  <a routerLink="login" routerLinkActive="active" class="item">{{getLoginLabel()}}</a>
+</div>
+
+<router-outlet></router-outlet>

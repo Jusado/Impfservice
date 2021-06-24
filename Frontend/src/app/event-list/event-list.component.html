@@ -1,0 +1,20 @@
+<h1>Willkommen beim Impfservice</h1>
+<h3>Folgende Termine stehen aktuell zur Auswahl:</h3>
+
+<div class="ui middle aligned selection divided list">
+<a
+    *ngFor="let event of events"
+    class="item is-event-list-item"
+    [event]="event"
+    [routerLink]=[event.id]
+  >
+  </a>
+
+  <div *ngIf="!events" class="ui active dimmer">
+    <div class="ui large text loader">Daten werden geladen</div>
+    <p *ngIf="events && !events.length">Es wurden noch keine Impftermine am Server eingetragen.</p>
+  </div>
+
+  <i> Es stehen aktuell leider keine weiteren Termine zur Verfügung! </i>
+
+</div>

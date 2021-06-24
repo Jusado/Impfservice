@@ -1,0 +1,15 @@
+<div class="content">
+
+  <span class="header">
+        {{event.location.town}}
+      </span>
+
+  <div class="description">{{ this.datepipe.transform(event.appointment,'dd.MM.yyyy') }} um
+    {{this.datepipe.transform(event.appointment,'HH:mm')}} Uhr
+  </div>
+
+  <div class="description">
+    {{ event.location.street}} {{ event.location.houseNumber}}, {{event.location.postCode}} {{event.location.town}}
+  </div>
+
+</div>
